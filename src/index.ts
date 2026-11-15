@@ -48,3 +48,36 @@ console.log(`Grades: ${grades.join(", ")}`);
 console.log(`Status: ${status.join(", ")}`);
 console.log(`Products: ${products.join(", ")}`);
 console.log(`Location: ${location.join(", ")}`);
+
+// Exercise 3: Function parameters and return types
+console.log("\n=== Exercise 3: Function Parameters ===");
+
+function fullName(first: string, last: string): string {
+  return first + " " + last;
+}
+
+console.log(`Full name: ${fullName("Maahir", "Abdullah")}`);
+
+function registerUser(
+  username: string,
+  isAdmin?: boolean,
+  language: string = "en",
+): void {
+  console.log(
+    `User: ${username}, Admin: ${isAdmin ?? false}, Language: ${language}`,
+  );
+}
+
+registerUser("Maahir");
+registerUser("Alex", true, "fr");
+
+function average(...scores: number[]): number {
+  if (scores.length === 0) {
+    return 0;
+  }
+
+  const total = scores.reduce((sum, score) => sum + score, 0);
+  return total / scores.length;
+}
+
+console.log(`Average score: ${average(85, 90, 78, 95)}`);
