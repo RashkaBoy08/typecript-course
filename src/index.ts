@@ -134,7 +134,9 @@ const echoedObject = echo({ username: "maahir", active: true });
 console.log(`Echo string: ${echoedString}`);
 console.log(`Echo number: ${echoedNumber}`);
 console.log(`Echo array: ${echoedArray.join(", ")}`);
-console.log(`Echo object: ${echoedObject.username}, active: ${echoedObject.active}`);
+console.log(
+  `Echo object: ${echoedObject.username}, active: ${echoedObject.active}`,
+);
 
 interface ApiResult<T> {
   status: string;
@@ -166,8 +168,35 @@ function first<T>(items: T[]): T {
 
 const firstNumber = first([10, 20, 30]);
 const firstName = first(["Maahir", "Alex"]);
-const firstUser = first([{ id: 1, name: "Sam" }, { id: 2, name: "Taylor" }]);
+const firstUser = first([
+  { id: 1, name: "Sam" },
+  { id: 2, name: "Taylor" },
+]);
 
 console.log(`First number: ${firstNumber}`);
 console.log(`First name: ${firstName}`);
 console.log(`First user: ${firstUser.id}: ${firstUser.name}`);
+
+// Exercise 6: Enums and DOM type assertions
+console.log("\n=== Exercise 6: Enums and DOM Types ===");
+
+enum UserRole {
+  Superadmin = "superadmin",
+  Moderator = "moderator",
+  Viewer = "viewer",
+}
+
+function canEdit(role: UserRole): boolean {
+  return role !== UserRole.Viewer;
+}
+
+console.log(`Can superadmin edit? ${canEdit(UserRole.Superadmin)}`);
+console.log(`Can moderator edit? ${canEdit(UserRole.Moderator)}`);
+console.log(`Can viewer edit? ${canEdit(UserRole.Viewer)}`);
+
+if (typeof document !== "undefined") {
+  const button = document.querySelector("button") as HTMLButtonElement | null;
+  if (button !== null) {
+    button.disabled = true;
+  }
+}
