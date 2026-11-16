@@ -81,3 +81,40 @@ function average(...scores: number[]): number {
 }
 
 console.log(`Average score: ${average(85, 90, 78, 95)}`);
+
+// Exercise 4: Interfaces, optional properties, and readonly properties
+console.log("\n=== Exercise 4: User Interface ===");
+
+interface User {
+  readonly id: number;
+  username: string;
+  password: string;
+  email?: string;
+}
+
+function login(user: User): void {
+  console.log(
+    `Login: ${user.username}, Email: ${user.email ?? "not provided"}, ID: ${user.id}`,
+  );
+}
+
+const userWithoutEmail: User = {
+  id: 1,
+  username: "maahir",
+  password: "example-password",
+};
+
+const userWithEmail: User = {
+  id: 2,
+  username: "alex",
+  password: "example-password",
+  email: "alex@example.com",
+};
+
+login(userWithoutEmail);
+login(userWithEmail);
+
+if (false) {
+  // @ts-expect-error The id property is readonly and cannot be reassigned.
+  userWithoutEmail.id = 3;
+}
