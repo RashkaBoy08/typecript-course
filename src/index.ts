@@ -118,3 +118,56 @@ if (false) {
   // @ts-expect-error The id property is readonly and cannot be reassigned.
   userWithoutEmail.id = 3;
 }
+
+// Exercise 5: Generic functions and interfaces
+console.log("\n=== Exercise 5: Generics ===");
+
+function echo<T>(input: T): T {
+  return input;
+}
+
+const echoedString = echo("Hello, generics!");
+const echoedNumber = echo(42);
+const echoedArray = echo([1, 2, 3]);
+const echoedObject = echo({ username: "maahir", active: true });
+
+console.log(`Echo string: ${echoedString}`);
+console.log(`Echo number: ${echoedNumber}`);
+console.log(`Echo array: ${echoedArray.join(", ")}`);
+console.log(`Echo object: ${echoedObject.username}, active: ${echoedObject.active}`);
+
+interface ApiResult<T> {
+  status: string;
+  data: T;
+}
+
+const messageResult: ApiResult<string> = {
+  status: "success",
+  data: "Request completed",
+};
+
+const userResult: ApiResult<{ id: number; name: string }> = {
+  status: "success",
+  data: { id: 1, name: "Alex" },
+};
+
+console.log(`Message result: ${messageResult.status} - ${messageResult.data}`);
+console.log(
+  `User result: ${userResult.status} - ${userResult.data.id}: ${userResult.data.name}`,
+);
+
+function first<T>(items: T[]): T {
+  if (items.length === 0) {
+    throw new Error("Cannot get the first item of an empty array.");
+  }
+
+  return items[0]!;
+}
+
+const firstNumber = first([10, 20, 30]);
+const firstName = first(["Maahir", "Alex"]);
+const firstUser = first([{ id: 1, name: "Sam" }, { id: 2, name: "Taylor" }]);
+
+console.log(`First number: ${firstNumber}`);
+console.log(`First name: ${firstName}`);
+console.log(`First user: ${firstUser.id}: ${firstUser.name}`);
